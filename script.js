@@ -81,12 +81,12 @@ async function deleteBtnClick(e) {
 
 function downloadBtnClick(e) {
     var storeName = e.target.parentElement.parentElement.getAttribute("data-storename");
-    window.open("/downloader/?store=" + storeName);
+    window.open("downloader/?store=" + storeName);
 }
 
 async function create() {
     var storeName = prompt("Enter new Store name");
-    window.open("/editor/?store=" + storeName);
+    window.open("editor/?store=" + storeName);
     await millis(1000);
     populateFileOpenerOptions();
 }
