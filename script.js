@@ -68,7 +68,7 @@ function getStoreName(value) {
 
 function editBtnClick(e) {
     var storeName = e.target.parentElement.parentElement.getAttribute("data-storename");
-    window.open("/editor/?store=" + storeName);
+    window.open("editor/?store=" + storeName);
 }
 
 async function deleteBtnClick(e) {
