@@ -1,1 +1,21 @@
-<script src="configloader.js"></script>
+<html>
+    <head>
+        <script src="configloader.js"></script>
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <h1>File List</h1>
+        <table id="fileTable">
+            <thead>
+                <td>Filename</td>
+                <td>Edit</td>
+                <td>Download</td>
+                <td>Delete</td>
+            </thead>
+            <tbody id="fileTableBody"></tbody>
+        </table>
+        <br>
+        <button onclick="create()">Create new store</button>
+    </body>
+</html>

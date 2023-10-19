@@ -7,13 +7,16 @@ options {
 
 function ConfigLoader(options) {
     var endpoint = "https://aidanjacobson.duckdns.org:42069";
-    var storageEndpoint, validateEndpoint, pingEndpoint;
-    var setEndpoints = function() {
+    var storageEndpoint, validateEndpoint, pingEndpoint, listEndpoint, deleteEndpoint;
+    var setEndpoints = function(endpointNew) {
+        endpoint = endpointNew;
         storageEndpoint = endpoint + "/store/" + options.store;
         validateEndpoint = endpoint + "/validate/" + options.securityKey;
         pingEndpoint = endpoint + "/ping";
+        listEndpoint = endpoint + "/list"
+        deleteEndpoint = endpoint + "/delete"
     }
-    setEndpoints();
+    setEndpoints(endpoint);
     var _this = this;
     _this.config = {};
     _this.validate = async function() {
@@ -30,6 +33,7 @@ function ConfigLoader(options) {
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Security-key", options.securityKey);
             xhr.send();
+            console.trace();
             xhr.onload = function() {
                 resolve(JSON.parse(xhr.responseText));
             }
@@ -56,6 +60,7 @@ function ConfigLoader(options) {
         return _this.config;
     }
     _this.uploadConfig = async function() {
+        if (options.store == "") return;
         await xhrPost(storageEndpoint, _this.config);
     }
 
@@ -75,9 +80,18 @@ function ConfigLoader(options) {
             setEndpoints(localEndpoint);
         }
     }
+    detectFastestEndpoint();
 
     async function pingAndReturn(url, retVal) {
         await xhrGet(url);
         return retVal;
+    }
+
+    _this.listStores = async function() {
+        return await xhrGet(listEndpoint);
+    }
+
+    _this.deleteStore = async function(storeName) {
+        return (await xhrGet(deleteEndpoint + "/" + storeName)).status == "success";
     }
 }
