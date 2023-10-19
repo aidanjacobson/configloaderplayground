@@ -33,7 +33,6 @@ function ConfigLoader(options) {
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Security-key", options.securityKey);
             xhr.send();
-            console.trace();
             xhr.onload = function() {
                 resolve(JSON.parse(xhr.responseText));
             }
