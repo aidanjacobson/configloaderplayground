@@ -68,8 +68,8 @@ function ConfigLoader(options) {
     }
 
     async function detectFastestEndpoint() {
-        /*
         var remoteEndpoint = "https://aidanjacobson.duckdns.org:42069";
+        /*
         var localEndpoint = "https://homeassistant.local:42069";
         var remotePromise = pingAndReturn(remoteEndpoint + "/ping", "remote");
         var localPromise = pingAndReturn(localEndpoint + "/ping", "local");
