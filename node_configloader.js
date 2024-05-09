@@ -22,7 +22,6 @@ function ConfigLoader(options) {
     var _this = this;
     _this.config = {};
     _this.validate = async function() {
-        await detectFastestEndpoint();
         validateEndpoint = endpoint + "/validate/" + options.securityKey;
         var response = await xhrGet(validateEndpoint);
         return response.valid;

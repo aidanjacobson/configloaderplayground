@@ -25,10 +25,10 @@ function initEditor() {
     editor = new JSONEditor(container, options);
 }
 
-async function save() {
+async function save(doAlert=true) {
     configLoader.config = editor.get();
     await configLoader.uploadConfig();
-    alert("Config successfully saved.")
+    if (doAlert) alert("Config successfully saved.")
 }
 
 async function discard() {
@@ -51,3 +51,12 @@ function closeFile() {
 function sendReload() {
     window.opener.postMessage("reload");
 }
+
+document.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.key === 's') {
+      // Prevent the Save dialog to open
+      e.preventDefault();
+      // Place your code here
+      save(true);
+    }
+  });
