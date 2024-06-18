@@ -6,6 +6,7 @@ window.onload = async function() {
     storeName = getStoreName();
     configLoader = new ConfigLoader({store:storeName, securityKey: localStorage.jsonstore_dkey});
     initEditor();
+    pageTitle.innerText = `Editing ${storeName}`;
     await retrieveStore();
 }
 
@@ -54,9 +55,7 @@ function sendReload() {
 
 document.addEventListener('keydown', e => {
     if (e.ctrlKey && e.key === 's') {
-      // Prevent the Save dialog to open
       e.preventDefault();
-      // Place your code here
       save(true);
     }
   });
